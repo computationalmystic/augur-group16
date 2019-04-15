@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Form Page</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Augur</title>
+<!--
+        <link rel="stylesheet" href="/static/app.css">
+    
+        <script src="/static/vendor.js"></script>
+-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.12.2/d3.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/metrics-graphics/2.12.0/metricsgraphics.js"></script>
+        
+<!--        <script src="/static/app.js"></script>-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        
+        <style> 
+            h1{
+                text-align: center;
+            }
+            
+            #buttonDiv{
+                text-align: center;
+            }
+        
+        </style>
+        
+        <script>
+//            function EnableInputs(){
+//               // document.getElementById("email").disabled = false;
+//                document.getElementById("username").disabled = false;
+//                document.getElementById("fname").disabled = false;
+//                document.getElementById("lname").disabled = false;
+//                document.getElementById("phone").disabled = false;
+//                document.getElementById("bday").disabled = false;
+//                document.getElementById("password").disabled = false;
+//            }
+//            function DisableInputs(){
+//               // document.getElementById("email").disabled = true;
+//                document.getElementById("username").disabled = true;
+//                document.getElementById("fname").disabled = true;
+//                document.getElementById("lname").disabled = true;
+//                document.getElementById("phone").disabled = true;
+//                document.getElementById("bday").disabled = true;
+//                document.getElementById("password").disabled = true;
+//            }
+//            function HandleEditButton(event){
+//                EnableInputs();
+//                document.getElementById("saveButton").style.display = 'inline';
+//                document.getElementById("cancelButton").style.display = 'inline';
+//                document.getElementById("oldpassword").style.display = 'inline';
+//                event.currentTarget.disabled = true;
+//            }
+//
+//            function HandleCancelButton(event){
+//                DisableInputs();
+//                document.getElementById("saveButton").style.display = 'none';
+//                document.getElementById("editButton").disabled = false;
+//                document.getElementById("oldpassword").style.display = 'none';
+//                event.currentTarget.style.display = 'none';
+//            }
+//
+//            function HandelDeleteProject(event){
+//                $("#deleteAcctWarning").modal();
+//            }
+            
+
+//            window.onload = DisableInputs;
+        </script>
+        
+    </head>
+    <body>
+<!--
+        <div id="app">
+            <augur-app></augur-app>
+          </div>
+          <a href="newForm.html">Test</a>
+          <script>
+            require('Augur.js').default()
+          </script>
+-->
+<a href="index.html">Test</a>     
+        <div class="background"> 
+            <div id='title' class='container-fluid titleBox'>            
+                <h1 class='title1'>Open Source Project Information</h1>            
+            </div>
+            <div class='container-fluid'>
+            <div class='row'>
+                <div class='col-1'></div>
+                <div class='col-10'>
+                    <div class='contentBox row' style='margin-left:0px'>           
+                        <div class='col-11'>
+                            <h5 class='title1' style='margin-bottom:1.5rem'>Account Info</h5>
+                            <form action="/handleNewForm" method="post">
+                                <div class='input-group mb-3'>
+                                    <div class='input-group-prepend'>
+                                        <span class='input-group-text'>Project Name</span>
+                                    </div>
+                                    <input type='text' class='form-control' placeholder='Name' id='name' name='name'> <span class='error'></span>
+                                </div>
+                                <div class='input-group mb-3'>
+                                    <div class='input-group-prepend'>
+                                        <span class='input-group-text'>Goal 1</span>
+                                    </div>
+                                    <input type='text' class='form-control' placeholder='Goal 1' name='goal1'> <span class='error'></span>
+                                </div>
+                                 <div class='input-group mb-3'>
+                                    <div class='input-group-prepend'>
+                                        <span class='input-group-text'>Goal 2</span>
+                                    </div>
+                                    <input type='text' class='form-control' placeholder='Goal 2' name='goal2'> <span class='error'></span>
+                                </div>
+                                 <div class='input-group mb-3'>
+                                    <div class='input-group-prepend'>
+                                        <span class='input-group-text'>Goal 3</span>
+                                    </div>
+                                    <input type='text' class='form-control' placeholder='Goal 3' name='goal3'> <span class='error'></span>
+                                </div>
+                                <div class='input-group mb-3'>
+                                    <div class='input-group-prepend'>
+                                        <span class='input-group-text'>Project/ GitHub URL</span>
+                                    </div>
+                                    <input type='text' class='form-control' placeholder='URL' name='url'> <span class='error'></span>
+                                </div>
+                               
+                                
+                                <textarea name="projectDescription" form="projectForm" rows="4" cols="129">Enter Project Description here...</textarea>
+                                <br>
+
+                                
+                                <div id="buttonDiv">
+                                    <button class='btn btn-secondary'  type='submit' name='submit'>Save Project Information</button>
+                                </div>
+                                <br>
+                                
+                            </form>
+                            
+            
+                            
+                        </div>
+                    
+                    </div>
+                </div>
+                <div class='col-1'></div>
+            </div>
+            </div>
+        </div>
+        
+<!--
+        <div>
+            <form id="projectForm">
+                Project Name<input type="text" name="projectname"> <br>
+                Project Goals<input type="text" name="goals"><br>
+                Project URL<input type="url" name="url"><br>
+
+
+                <input type="submit" value="Submit">
+
+
+            </form>
+
+            <textarea name="projectDescription" form="projectForm" rows="4" cols="50">Enter Project Description here...</textarea>
+        </div>
+-->
+    
+    </body>
+</html>
