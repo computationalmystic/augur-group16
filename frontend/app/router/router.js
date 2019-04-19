@@ -17,6 +17,8 @@ import MainControls from '../components/MainControls.vue'
 import AugurHeader from '../components/AugurHeader.vue'
 import Tabs from '../components/Tabs.vue'
 import TableView from '../components/TableView.vue'
+import NewForm from '../components/NewForm.vue'
+
 
 let routes = [
         {path: '/', component: AugurCards,
@@ -117,6 +119,17 @@ let routes = [
               content: OverviewCard
             }
           },
+          {
+            path: "newform",
+            name: "newform",
+            components: {
+              header: AugurHeader,
+              tabs: Tabs,
+              controls: MainControls,
+              content: NewForm
+            }
+          },
+            
         ]
       },
       // {path: '/:tab/:domain/:owner/:repo/comparedto/:comparedowner/:comparedrepo', component: AugurCards, name: 'gitsinglecompare'},

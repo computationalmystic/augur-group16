@@ -2054,6 +2054,36 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
 })()}
 });
 
+;require.register("components/NewForm.vue", function(exports, require, module) {
+;(function(){
+"use strict";
+
+module.exports = {
+  data: function data() {
+    return {};
+  },
+
+  methods: {},
+  computed: {}
+};
+})()
+if (module.exports.__esModule) module.exports = module.exports.default
+var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
+if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _vm._m(0)}
+__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('p',[_vm._v("Print to the page")]),_vm._v(" "),_c('p',[_vm._v("New Headers")]),_vm._v(" "),_c('form',{attrs:{"action":"/handleNewForm","method":"post"}},[_c('div',[_c('div',[_c('span',[_vm._v("Project Name")])]),_vm._v(" "),_c('input',{attrs:{"type":"text","placeholder":"Name","id":"name","name":"name"}})]),_vm._v(" "),_c('div',[_c('div',[_c('span',[_vm._v("Goal 1")])]),_vm._v(" "),_c('input',{attrs:{"type":"text","placeholder":"Goal 1","name":"goal1"}})]),_vm._v(" "),_c('div',[_c('div',[_c('span',[_vm._v("Goal 2")])]),_vm._v(" "),_c('input',{attrs:{"type":"text","placeholder":"Goal 2","name":"goal2"}})]),_vm._v(" "),_c('div',[_c('div',[_c('span',[_vm._v("Goal 3")])]),_vm._v(" "),_c('input',{attrs:{"type":"text","placeholder":"Goal 3","name":"goal3"}})]),_vm._v(" "),_c('div',[_c('div',[_c('span',[_vm._v("Project/ GitHub URL")])]),_vm._v(" "),_c('input',{attrs:{"type":"text","placeholder":"URL","name":"url"}})]),_vm._v(" "),_c('textarea',{attrs:{"name":"projectDescription","form":"projectForm","rows":"4","cols":"129"}},[_vm._v("Enter Project Description here...")]),_vm._v(" "),_c('br'),_vm._v(" "),_c('div',{attrs:{"id":"buttonDiv"}},[_c('button',{attrs:{"type":"submit","name":"submit"}},[_vm._v("Save Project Information")])]),_vm._v(" "),_c('br')])])}]
+if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-c1250cb2", __vue__options__)
+  } else {
+    hotAPI.reload("data-v-c1250cb2", __vue__options__)
+  }
+})()}
+});
+
 ;require.register("components/OverviewCard.vue", function(exports, require, module) {
 ;(function(){
 'use strict';
@@ -2403,7 +2433,7 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('nav',{staticClass:"tabs"},[_c('ul',[_c('li',{class:{ active: (_vm.currentTab == 'gmd') }},[_c('a',{attrs:{"href":"#","data-value":"gmd"},on:{"click":_vm.changeTab}},[_vm._v("Growth, Maturity, and Decline")])]),_vm._v(" "),_c('li',{class:{ active: (_vm.currentTab == 'diversityinclusion') }},[_c('a',{attrs:{"href":"#","data-value":"diversityinclusion"},on:{"click":_vm.changeTab}},[_vm._v("Diversity and Inclusion")])]),_vm._v(" "),_c('li',{class:{ active: (_vm.currentTab == 'risk') }},[_c('a',{attrs:{"href":"#","data-value":"risk"},on:{"click":_vm.changeTab}},[_vm._v("Risk")])]),_vm._v(" "),_c('li',{class:{ active: (_vm.currentTab == 'value') }},[_c('a',{attrs:{"href":"#","data-value":"value"},on:{"click":_vm.changeTab}},[_vm._v("Value")])]),_vm._v(" "),_c('li',{class:{ active: (_vm.currentTab == 'activity') }},[_c('a',{attrs:{"href":"#","data-value":"activity"},on:{"click":_vm.changeTab}},[_vm._v("Activity")])]),_vm._v(" "),_c('li',{class:{ active: (_vm.currentTab == 'experimental') }},[_c('a',{attrs:{"href":"#","data-value":"experimental"},on:{"click":_vm.changeTab}},[_vm._v("Experimental")])]),_vm._v(" "),_c('li',{class:{ active: (_vm.currentTab == 'git'), hidden: !_vm.gitRepo }},[_c('a',{attrs:{"href":"#","data-value":"git"},on:{"click":_vm.changeTab}},[_vm._v("Git")])]),_vm._v(" "),_c('li',{class:{ active: (_vm.currentTab == 'overview'), hidden: !_vm.gitRepo }},[_c('a',{attrs:{"href":"#","data-value":"overview"},on:{"click":_vm.changeTab}},[_vm._v("Overview")])])])])}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('nav',{staticClass:"tabs"},[_c('ul',[_c('li',{class:{ active: (_vm.currentTab == 'gmd') }},[_c('a',{attrs:{"href":"#","data-value":"gmd"},on:{"click":_vm.changeTab}},[_vm._v("Growth, Maturity, and Decline")])]),_vm._v(" "),_c('li',{class:{ active: (_vm.currentTab == 'diversityinclusion') }},[_c('a',{attrs:{"href":"#","data-value":"diversityinclusion"},on:{"click":_vm.changeTab}},[_vm._v("Diversity and Inclusion")])]),_vm._v(" "),_c('li',{class:{ active: (_vm.currentTab == 'risk') }},[_c('a',{attrs:{"href":"#","data-value":"risk"},on:{"click":_vm.changeTab}},[_vm._v("Risk")])]),_vm._v(" "),_c('li',{class:{ active: (_vm.currentTab == 'value') }},[_c('a',{attrs:{"href":"#","data-value":"value"},on:{"click":_vm.changeTab}},[_vm._v("Value")])]),_vm._v(" "),_c('li',{class:{ active: (_vm.currentTab == 'activity') }},[_c('a',{attrs:{"href":"#","data-value":"activity"},on:{"click":_vm.changeTab}},[_vm._v("Activity")])]),_vm._v(" "),_c('li',{class:{ active: (_vm.currentTab == 'experimental') }},[_c('a',{attrs:{"href":"#","data-value":"experimental"},on:{"click":_vm.changeTab}},[_vm._v("Experimental")])]),_vm._v(" "),_c('li',{class:{ active: (_vm.currentTab == 'git'), hidden: !_vm.gitRepo }},[_c('a',{attrs:{"href":"#","data-value":"git"},on:{"click":_vm.changeTab}},[_vm._v("Git")])]),_vm._v(" "),_c('li',{class:{ active: (_vm.currentTab == 'overview'), hidden: !_vm.gitRepo }},[_c('a',{attrs:{"href":"#","data-value":"overview"},on:{"click":_vm.changeTab}},[_vm._v("Overview")])]),_vm._v(" "),_c('li',{class:{ active: (_vm.currentTab == 'newForm') }},[_c('a',{attrs:{"href":"#","data-value":"newform"},on:{"click":_vm.changeTab}},[_vm._v("Info")])])])])}
 __vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -3451,7 +3481,9 @@ exports.default = {
                 "field": "date",
                 "type": "temporal",
                 "axis": {
-                  "labels": !this.showDetail
+                  "labels": this.showDetail,
+                  "format": "%b %Y",
+                  "title": " "
                 }
               },
               "color": {
@@ -8623,6 +8655,10 @@ var _TableView = require('../components/TableView.vue');
 
 var _TableView2 = _interopRequireDefault(_TableView);
 
+var _NewForm = require('../components/NewForm.vue');
+
+var _NewForm2 = _interopRequireDefault(_NewForm);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var routes = [{ path: '/', component: _AugurCards2.default,
@@ -8708,6 +8744,15 @@ var routes = [{ path: '/', component: _AugurCards2.default,
       tabs: _Tabs2.default,
       controls: _MainControls2.default,
       content: _OverviewCard2.default
+    }
+  }, {
+    path: "newform",
+    name: "newform",
+    components: {
+      header: _AugurHeader2.default,
+      tabs: _Tabs2.default,
+      controls: _MainControls2.default,
+      content: _NewForm2.default
     }
   }]
 },

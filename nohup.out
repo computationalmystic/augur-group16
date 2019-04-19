@@ -1,0 +1,64 @@
+
+Could not find conda environment: augur
+You can list all discoverable environments with `conda info --envs`.
+
+Could not find conda environment: augur
+You can list all discoverable environments with `conda info --envs`.
+
+Server     Description       Log                   Monitoring                   PID                        
+------------------------------------------------------------------------------------------                 
+Frontend   Brunch            logs/frontend.log     make monitor-backend         12163 
+Backend    Augur/Gunicorn    logs/backend.log      make monitor-frontend        12140 
+
+Monitor both:  make monitor  
+Restart and monitor: make dev
+Restart servers:  make dev-start 
+Stop servers:  make dev-stop 
+
+Could not find conda environment: augur
+You can list all discoverable environments with `conda info --envs`.
+
+Could not find conda environment: augur
+You can list all discoverable environments with `conda info --envs`.
+
+Server     Description       Log                   Monitoring                   PID                        
+------------------------------------------------------------------------------------------                 
+Frontend   Brunch            logs/frontend.log     make monitor-backend         28393 
+Backend    Augur/Gunicorn    logs/backend.log      make monitor-frontend        28370 
+
+Monitor both:  make monitor  
+Restart and monitor: make dev
+Restart servers:  make dev-start 
+Stop servers:  make dev-stop 
+
+Could not find conda environment: augur
+You can list all discoverable environments with `conda info --envs`.
+
+Could not find conda environment: augur
+You can list all discoverable environments with `conda info --envs`.
+
+Server     Description       Log                   Monitoring                   PID                        
+------------------------------------------------------------------------------------------                 
+Frontend   Brunch            logs/frontend.log     make monitor-backend         5540 
+Backend    Augur/Gunicorn    logs/backend.log      make monitor-frontend        5517 
+
+Monitor both:  make monitor  
+Restart and monitor: make dev
+Restart servers:  make dev-start 
+Stop servers:  make dev-stop 
+sending SIGTERM to node (Brunch) at PID 5540; sending SIGTERM to python (Gunicorn) at PID 5517; 
+Could not find conda environment: augur
+You can list all discoverable environments with `conda info --envs`.
+
+Could not find conda environment: augur
+You can list all discoverable environments with `conda info --envs`.
+
+Server     Description       Log                   Monitoring                   PID                        
+------------------------------------------------------------------------------------------                 
+Frontend   Brunch            logs/frontend.log     make monitor-backend         5628 
+Backend    Augur/Gunicorn    logs/backend.log      make monitor-frontend        5605 
+
+Monitor both:  make monitor  
+Restart and monitor: make dev
+Restart servers:  make dev-start 
+Stop servers:  make dev-stop 
