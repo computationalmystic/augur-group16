@@ -9,7 +9,7 @@ mydb = mysql.connector.connect(
   database="git_sixteen"
 )
 
-@app.route('/handleNewForm', methods['POST'])
+@server.app.route('/handleNewForm', methods['POST'])
 def handleNewForm():
     print("Test")
     name = request.form['name']

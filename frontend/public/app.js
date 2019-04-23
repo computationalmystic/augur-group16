@@ -762,6 +762,9 @@ var AugurAPI = function () {
         Timeseries(repo, 'majorTags', 'tags/major');
         Timeseries(repo, 'newWatchers', 'new_watchers');
         Timeseries(repo, 'tags', 'tags');
+
+        Endpoint(repo, 'handleNewForm', 'handleNewForm');
+        Endpoint(repo, 'projectInformation', 'project_information');
       }
 
       if (repo.gitURL) {
@@ -2055,23 +2058,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
 });
 
 ;require.register("components/NewForm.vue", function(exports, require, module) {
-;(function(){
-"use strict";
-
-module.exports = {
-  data: function data() {
-    return {};
-  },
-
-  methods: {},
-  computed: {}
-};
-})()
-if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
-if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _vm._m(0)}
-__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('p',[_vm._v("Print to the page")]),_vm._v(" "),_c('p',[_vm._v("New Headers")]),_vm._v(" "),_c('form',{attrs:{"action":"/handleNewForm","method":"post"}},[_c('div',[_c('div',[_c('span',[_vm._v("Project Name")])]),_vm._v(" "),_c('input',{attrs:{"type":"text","placeholder":"Name","id":"name","name":"name"}})]),_vm._v(" "),_c('div',[_c('div',[_c('span',[_vm._v("Goal 1")])]),_vm._v(" "),_c('input',{attrs:{"type":"text","placeholder":"Goal 1","name":"goal1"}})]),_vm._v(" "),_c('div',[_c('div',[_c('span',[_vm._v("Goal 2")])]),_vm._v(" "),_c('input',{attrs:{"type":"text","placeholder":"Goal 2","name":"goal2"}})]),_vm._v(" "),_c('div',[_c('div',[_c('span',[_vm._v("Goal 3")])]),_vm._v(" "),_c('input',{attrs:{"type":"text","placeholder":"Goal 3","name":"goal3"}})]),_vm._v(" "),_c('div',[_c('div',[_c('span',[_vm._v("Project/ GitHub URL")])]),_vm._v(" "),_c('input',{attrs:{"type":"text","placeholder":"URL","name":"url"}})]),_vm._v(" "),_c('textarea',{attrs:{"name":"projectDescription","form":"projectForm","rows":"4","cols":"129"}},[_vm._v("Enter Project Description here...")]),_vm._v(" "),_c('br'),_vm._v(" "),_c('div',{attrs:{"id":"buttonDiv"}},[_c('button',{attrs:{"type":"submit","name":"submit"}},[_vm._v("Save Project Information")])]),_vm._v(" "),_c('br')])])}]
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return

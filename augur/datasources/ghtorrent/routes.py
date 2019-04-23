@@ -16,6 +16,27 @@ def create_routes(server):
     #####################################
     ### GROWTH, MATURITY, AND DECLINE ###
     #####################################
+#    @server.app.route('/handleNewForm', methods['POST'])
+#    def handleNewForm():
+#        print("Test")
+#        name = request.form['name']
+#        goal1 = request.form['goal1']
+#        goal2 = request.form['goal2']
+#        goal3 = request.form['goal3']
+#        url = request.form['url']
+#        description = request.form['projectDescription']
+#
+#        mycursor = mydb.cursor()
+#
+#        sql = "INSERT INTO  repo_info(repoName, url, goal1, goal2, goal3) VALUES (%s, %s, %s, %s, %s)"
+#        val = (name, goal1, goal2, goal3, url)
+#        mycursor.execute(sql, val)
+#
+#        mydb.commit()
+#
+#        print("The name is " +name)
+#
+#        return redirect('/NewForm')
 
     """
     @api {get} /:owner/:repo/timeseries/issues/closed Closed Issues
@@ -803,6 +824,9 @@ def create_routes(server):
                         ]
     """
     server.addTimeseries(ghtorrent.new_watchers, 'new_watchers')
+    
+    
+    server.addMetric(ghtorrent.project_information, 'project_information')
 
     """
     @api {get} /ghtorrent_range GHTorrent Date Range

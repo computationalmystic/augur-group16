@@ -1,7 +1,6 @@
 <template>
     <div>
-        <p>Print to the page</p>
-        <p>New Headers</p>
+        
         <form action="/handleNewForm" method="post">
                                 <div>
                                     <div>
@@ -39,7 +38,7 @@
                                 <br>
 
                                 
-                                <div id="buttonDiv">
+                                <div id="buttonDiv" @click="handleNewForm()">
                                     <button type='submit' name='submit'>Save Project Information</button>
                                 </div>
                                 <br>
@@ -52,10 +51,18 @@
   module.exports = {
     data() {
       return {
-
+      
       }
     },
     methods: {
+    
+        handleNewForm(){
+            let repo = window.AugurAPI.Repo({ githubURL: this.repo })
+            repo.handleNewForm().then((data) => {
+            console.log("HERE", data)
+            this.values = data
+      })
+        }
 
     },
     computed: {

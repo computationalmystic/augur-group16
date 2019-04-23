@@ -1044,3 +1044,25 @@ class GHTorrent(object):
             GROUP BY YEARWEEK(created_at)
         """)
         return pd.read_sql(newWatchersSQL, self.db, params={"repoid": str(repoid)})
+    
+    #####################################
+    ###    Project Information    ###
+    #####################################
+    @annotate(tag='project_information')
+    def project_information(self, owner, repo=None): 
+        """
+        Basic Information about the selected Project
+
+        :param owner: The name of the project owner or the id of the project in the projects table of the project in the projects table.
+        :param repo: The name of the repo. Unneeded if repository id was passed as owner.
+        :return: DataFrame with new watchers/week
+        """
+        projectid = self.repoid(owner, repo)
+        projectInfoSQL = s.sql.text("""
+            SELECT *
+            FROM projects
+            WHERE id = :projectid
+        """)
+        return pd.read_sql(projectInfoSQL, self.db, params={"repoid": str(repoid)})
+    
+    

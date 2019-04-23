@@ -285,6 +285,10 @@ export default class AugurAPI {
       Timeseries(repo, 'majorTags', 'tags/major')
       Timeseries(repo, 'newWatchers', 'new_watchers')
       Timeseries(repo, 'tags', 'tags')
+        
+        
+      Endpoint(repo, 'handleNewForm', 'handleNewForm')
+      Endpoint(repo, 'projectInformation', 'project_information')
     }
 
     if (repo.gitURL) {
