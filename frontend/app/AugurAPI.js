@@ -289,6 +289,7 @@ export default class AugurAPI {
         
       Endpoint(repo, 'handleNewForm', 'handleNewForm')
       Endpoint(repo, 'projectInformation', 'project_information')
+      Endpoint(repo, 'getLanguages', 'get_languages')
     }
 
     if (repo.gitURL) {

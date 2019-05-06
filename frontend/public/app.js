@@ -765,6 +765,7 @@ var AugurAPI = function () {
 
         Endpoint(repo, 'handleNewForm', 'handleNewForm');
         Endpoint(repo, 'projectInformation', 'project_information');
+        Endpoint(repo, 'getLanguages', 'get_languages');
       }
 
       if (repo.gitURL) {
@@ -2058,7 +2059,103 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
 });
 
 ;require.register("components/NewForm.vue", function(exports, require, module) {
+;(function(){
+'use strict';
+
+module.exports = {
+    data: function data() {
+
+        return {
+            values: [],
+            languages: [],
+            loaded: false,
+            newLanguageText: ''
+        };
+    },
+
+    methods: {
+        editMode: function editMode() {
+
+            document.getElementById('description').disabled = false;
+            document.getElementById('url').disabled = false;
+            document.getElementById('name').disabled = false;
+
+            var cancel = document.getElementById("cancel");
+            cancel.style.display = "block";
+            var save = document.getElementById("save");
+            save.style.display = "block";
+
+            var edit = document.getElementById("edit");
+            edit.style.display = "none";
+
+            var display = document.getElementById("displayDiv");
+            display.style.display = "none";
+
+            var editDiv = document.getElementById("editDiv");
+            editDiv.style.display = "block";
+        },
+        cancelInputs: function cancelInputs() {
+
+            var cancel = document.getElementById("cancel");
+            cancel.style.display = "none";
+
+            var save = document.getElementById("save");
+            save.style.display = "none";
+
+            var edit = document.getElementById("edit");
+            edit.style.display = "block";
+
+            var editDiv = document.getElementById("editDiv");
+            editDiv.style.display = "none";
+
+            var display = document.getElementById("displayDiv");
+            display.style.display = "block";
+        },
+        saveInputs: function saveInputs() {
+
+            var project_name = document.getElementById("name").value;
+            var github_url = document.getElementById("url").value;
+            var project_description = document.getElementById("description").value;
+
+            console.log('Project name: ' + project_name + ' url: ' + github_url + ' description: ' + project_description);
+
+            var url = 'http://ec2-18-217-141-58.us-east-2.compute.amazonaws.com:5000/api/unstable/ghtorrent/edit_project_information?new_name=' + project_name + '&new_description=' + project_description + '&new_url=' + github_url;
+            console.log(url);
+            var method = {
+                method: "POST",
+                mode: 'no-cors'
+            };
+
+            fetch(url, method);
+        }
+    },
+    computed: {
+        repo: function repo() {
+            return this.$store.state.baseRepo;
+        }
+    },
+    created: function created() {
+        var _this = this;
+
+        var repo = window.AugurAPI.Repo({ githubURL: this.repo });
+        repo.projectInformation().then(function (data) {
+            console.log("HERE", data);
+            _this.values = data;
+        });
+
+        var language = window.AugurAPI.Repo({ githubURL: this.repo });
+        language.getLanguages().then(function (data) {
+            console.log("TWO", data);
+            _this.languages = data;
+        });
+    }
+};
+})()
+if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
+if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('div',{attrs:{"id":"displayDiv"}},[_c('h1',{attrs:{"id":"proj-name"}},[_vm._v(_vm._s(_vm.values[0].name)+" ")]),_vm._v(" "),_c('div',[_vm._m(0),_vm._v(" "),_c('a',{attrs:{"href":_vm.values[0].url}},[_vm._v("GitHub")])]),_vm._v(" "),_c('div',[_vm._m(1),_vm._v(" "),_c('ul',{attrs:{"id":"example-1"}},_vm._l((_vm.languages),function(languages){return _c('li',[_vm._v("\n                    "+_vm._s(languages.language)+"\n                  ")])}))]),_vm._v(" "),_c('div',[_vm._m(2),_vm._v(" "),_c('p',[_vm._v(_vm._s(_vm.values[0].description))])]),_vm._v(" "),_c('input',{attrs:{"id":"edit","type":"button","value":"Edit"},on:{"click":_vm.editMode}})]),_vm._v(" "),_c('div',{staticStyle:{"display":"none"},attrs:{"id":"editDiv"}},[_c('form',{attrs:{"action":"","method":"post"}},[_c('div',[_vm._m(3),_vm._v(" "),_c('input',{attrs:{"disabled":"","type":"text","placeholder":_vm.values[0].name,"id":"name"}})]),_vm._v(" "),_c('div',[_vm._m(4),_vm._v(" "),_c('input',{attrs:{"disabled":"","id":"url","type":"text","placeholder":_vm.values[0].url}})]),_vm._v(" "),_vm._m(5),_vm._v(" "),_c('textarea',{attrs:{"disabled":"","id":"description","form":"projectForm","rows":"2","cols":"129"}},[_vm._v(_vm._s(_vm.values[0].description))]),_vm._v(" "),_c('br'),_vm._v(" "),_c('div',{attrs:{"id":"buttonDiv"},on:{"click":function($event){_vm.makeLanguageList()}}},[_c('button',{attrs:{"type":"submit"}},[_vm._v("Save Project Information")])]),_vm._v(" "),_c('div',{attrs:{"id":"buttonDiv"}},[_c('input',{staticStyle:{"display":"none"},attrs:{"id":"cancel","type":"button","value":"Cancel"},on:{"click":_vm.cancelInputs}}),_vm._v(" "),_c('input',{staticStyle:{"display":"none"},attrs:{"id":"save","type":"button","value":"Save"},on:{"click":_vm.saveInputs}})]),_vm._v(" "),_c('br')])])])}
+__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('span',[_vm._v("GitHub URL")])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('span',[_vm._v("Languages Used:")])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('span',[_vm._v("Project Description")])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('span',[_vm._v("Project Name")])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('span',[_vm._v("Project/ GitHub URL")])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('span',[_vm._v("Project Description:")])])}]
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return

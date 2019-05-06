@@ -94,3 +94,35 @@ Monitor both:  make monitor
 Restart and monitor: make dev
 Restart servers:  make dev-start 
 Stop servers:  make dev-stop 
+
+Could not find conda environment: augur
+You can list all discoverable environments with `conda info --envs`.
+
+Could not find conda environment: augur
+You can list all discoverable environments with `conda info --envs`.
+
+Server     Description       Log                   Monitoring                   PID                        
+------------------------------------------------------------------------------------------                 
+Frontend   Brunch            logs/frontend.log     make monitor-backend         2135 
+Backend    Augur/Gunicorn    logs/backend.log      make monitor-frontend        2112 
+
+Monitor both:  make monitor  
+Restart and monitor: make dev
+Restart servers:  make dev-start 
+Stop servers:  make dev-stop 
+
+Could not find conda environment: augur
+You can list all discoverable environments with `conda info --envs`.
+
+Could not find conda environment: augur
+You can list all discoverable environments with `conda info --envs`.
+
+Server     Description       Log                   Monitoring                   PID                        
+------------------------------------------------------------------------------------------                 
+Frontend   Brunch            logs/frontend.log     make monitor-backend         2270 
+Backend    Augur/Gunicorn    logs/backend.log      make monitor-frontend        2247 
+
+Monitor both:  make monitor  
+Restart and monitor: make dev
+Restart servers:  make dev-start 
+Stop servers:  make dev-stop 

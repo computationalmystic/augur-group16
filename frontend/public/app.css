@@ -2557,6 +2557,9 @@ tspan.mg-points-mono {
     font-size: 0.6rem;
 }
 
+#proj-name {
+  text-align: center;
+}
 body {
   background: #eaeaea;
   padding-bottom: 216px;

@@ -1057,12 +1057,45 @@ class GHTorrent(object):
         :param repo: The name of the repo. Unneeded if repository id was passed as owner.
         :return: DataFrame with new watchers/week
         """
-        projectid = self.repoid(owner, repo)
+        repoid = self.repoid(owner, repo)
         projectInfoSQL = s.sql.text("""
             SELECT *
             FROM projects
-            WHERE id = :projectid
+            WHERE id = :repoid
         """)
         return pd.read_sql(projectInfoSQL, self.db, params={"repoid": str(repoid)})
     
+    @annotate(tag='get_languages')
+    def get_languages(self, owner, repo=None): 
+        """
+        Retrives languages that the selected project uses
+
+        :param owner: The name of the project owner or the id of the project in the projects table of the project in the projects table.
+        :param repo: The name of the repo. Unneeded if repository id was passed as owner.
+        :return: DataFrame with new watchers/week
+        """
+        repoid = self.repoid(owner, repo)
+        projectInfoSQL = s.sql.text("""
+            SELECT DISTINCT language
+            FROM project_languages
+            WHERE project_id = :repoid
+        """)
+        return pd.read_sql(projectInfoSQL, self.db, params={"repoid": str(repoid)})
+    
+    @annotate(tag='edit_project_information')
+    def edit_project_information(self, owner, new_name, new_description, new_url): 
+        """
+        Edit Basic Information about the selected Project
+
+        :param owner: The name of the project owner or the id of the project in the projects table of the project in the projects table.
+        :param repo: The name of the repo. Unneeded if repository id was passed as owner.
+        :return: DataFrame with new watchers/week
+        """
+        repoid = self.repoid(owner, repo)
+        projectInfoSQL = s.sql.text("""
+            UPDATE projects
+            SET url = %s, name = %s, description = %s
+            WHERE project_id = :repoid
+        """, (new_name, new_description, new_url))
+        return pd.read_sql(projectInfoSQL, self.db, params={"repoid": str(repoid)})    
     

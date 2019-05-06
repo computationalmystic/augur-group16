@@ -827,6 +827,8 @@ def create_routes(server):
     
     
     server.addMetric(ghtorrent.project_information, 'project_information')
+    server.addMetric(ghtorrent.get_languages, 'get_languages')
+    server.addMetric(ghtorrent.edit_project_information, 'edit_project_information')
 
     """
     @api {get} /ghtorrent_range GHTorrent Date Range

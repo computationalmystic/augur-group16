@@ -24,13 +24,13 @@
     },
     "GHTorrent": {
         "host": "classes.augurlabs.io",
-        "name": "ghtorrent_minimal",
-        "pass": "password",
+        "name": "ghtorrent_minimal_16",
+        "pass": "texas2019",
         "port": "3306",
-        "user": "augur"
+        "user": "austin"
     },
     "GitHub": {
-        "apikey": "5ecf7074e52d871d62e033cfc8447fd5456ee934"
+        "apikey": "ef791eacdb8b940a36a2a0a25a2bf097082abf65"
     },
     "LibrariesIO": {
         "apikey": ""
