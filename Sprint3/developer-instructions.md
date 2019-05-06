@@ -1,6 +1,6 @@
 # Developer Instructions of Augur
 
-##[Augur on EC2](#augur-ec2)
+## [Augur on EC2](#augur-ec2)
 
 *Note the first half these instructions are the ones that were provided for us at the start of the project with small details being changed. These include git cloning our group's repository and other useful things that we have learned throughout the semester 
 
