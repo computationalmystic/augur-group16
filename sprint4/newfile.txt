@@ -1,0 +1,45 @@
+apr 23
+	sql.md added
+	augur.config.json edit
+	datasources\ghtorrent\ghtorrent.py edit
+	frontend\routes.py edit
+	frontend\app\AugurAPI.js edit
+	frontend\app\components\NewForm.vue edit
+	frontend\app\components\handleNewForm.py edit
+	frontend\package-lock.json edit
+	frontend\package.json edit
+	frontend\public\app.js edit
+	frontend\public\app.js.map edit
+	nohup.out edit
+	
+apr 19
+	augur.config.json edit
+	augur.config.json created
+	augur\datasources\facade\facade.py edit
+	augur\datasources\facade\test_facade.py edit
+	augur\metadata.py edit
+	docs\python\source\dev-guide\2-install.rst edit
+	frontend\public\retrieveData.py created
+	frontend\public\updateForm.py created
+	demo.py created
+	frontend\app\components\NewForm.vue created
+	frontend\app\components\Tabs.vue edit
+	frontend\app\components\charts\DynamicLineChart.vue edit
+	frontend\app\components\handleNewForm.py created
+	frontend\app\router\router.js edit
+	frontend\public\app.js edit
+	frontend\public\app.js.map edit
+	frontend\public\docs\dev-guide\2-install.html edit
+	frontend\public\docs\dev-guide\2-install.html created
+	frontend\public\newForm.html created
+	nohup.out created
+
+apr 15
+	augur.config.json created
+	frontend\public\handleNewForm.py created
+	frontend\public\handleNewForm.py created
+	frontend\public\newForm.html crreated
+	frontend\public\updateForm.py created
+	frontend\app\router\router.js edit	
+	frontend\app\components\NewForm.vue created
+	frontend\app\components\NewForm.vue edit
