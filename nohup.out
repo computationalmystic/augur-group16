@@ -126,3 +126,37 @@ Monitor both:  make monitor
 Restart and monitor: make dev
 Restart servers:  make dev-start 
 Stop servers:  make dev-stop 
+sending SIGTERM to node (Brunch) at PID 9805; bash: line 0: kill: (9805) - No such process
+sending SIGTERM to python (Gunicorn) at PID 9782; bash: line 0: kill: (9782) - No such process
+
+Could not find conda environment: augur
+You can list all discoverable environments with `conda info --envs`.
+
+Could not find conda environment: augur
+You can list all discoverable environments with `conda info --envs`.
+
+Server     Description       Log                   Monitoring                   PID                        
+------------------------------------------------------------------------------------------                 
+Frontend   Brunch            logs/frontend.log     make monitor-backend         9951 
+Backend    Augur/Gunicorn    logs/backend.log      make monitor-frontend        9928 
+
+Monitor both:  make monitor  
+Restart and monitor: make dev
+Restart servers:  make dev-start 
+Stop servers:  make dev-stop 
+
+Could not find conda environment: augur
+You can list all discoverable environments with `conda info --envs`.
+
+Could not find conda environment: augur
+You can list all discoverable environments with `conda info --envs`.
+
+Server     Description       Log                   Monitoring                   PID                        
+------------------------------------------------------------------------------------------                 
+Frontend   Brunch            logs/frontend.log     make monitor-backend         10046 
+Backend    Augur/Gunicorn    logs/backend.log      make monitor-frontend        10023 
+
+Monitor both:  make monitor  
+Restart and monitor: make dev
+Restart servers:  make dev-start 
+Stop servers:  make dev-stop 

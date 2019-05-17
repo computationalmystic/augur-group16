@@ -2,29 +2,44 @@
     <div>
         <div id="displayDiv">
             <h1 id="proj-name">{{ values[0].name}} </h1>
-            <div>
+            <div id="github-div">
                  <div>
-                    <span>GitHub URL</span>
+                    <h2 class="info-headers">GitHub URL</h2>
                 </div>
-                    <a :href="values[0].url">GitHub</a>
+                    <br>
+                    <a :href="values[0].url">{{ values[0].url}}</a>
+            </div>
+             <div id="description-div">
+                 <div>
+                    <h2 class="info-headers">Project Description</h2>
+                </div>
+                    <br>
+                    <p>{{ values[0].description}}</p>
             </div>
             <div>
                     <div>
-                        <span>Languages Used:</span>
+                        <h2 class="info-headers">Languages Used:</h2>
                     </div>
                     <ul id="example-1">
                       <li v-for="languages in languages">
                         {{ languages.language }}
                       </li>
                     </ul>
+                    <language-byte-bar-chart source="languageBytesUsed"
+                       title="Bytes Used per Language "
+                       cite-url=""
+                       cite-text="Language Bytes">
+                    </language-byte-bar-chart>
+                    <div ref="holder" style="position: relative; z-index: 5">
+                        <div class="chart">
+                            <h3 style="text-align: center">{{ title }}</h3>
+                            <vega-lite :spec="spec" :data="values"></vega-lite>
+                            <p> {{ chart }} </p>
+                        </div>
+                    </div>
             </div>
-             <div>
-                 <div>
-                    <span>Project Description</span>
-                </div>
-                    <p>{{ values[0].description}}</p>
-            </div>
-            <input id="edit" type="button" @click="editMode" value="Edit">
+            
+            <input class="info-buttons" id="edit" type="button" @click="editMode" value="Edit">
             
         </div>
         <div id="editDiv" style="display:none;">
@@ -52,12 +67,11 @@
                
 
                 <div id="buttonDiv" @click="makeLanguageList()">
-                    <button type='submit'>Save Project Information</button>
                 </div>
                 <div id="buttonDiv">
                     
-                    <input style="display:none;" id="cancel" type="button" @click="cancelInputs" value="Cancel">
-                    <input style="display:none;" id="save" type="button" @click="saveInputs" value="Save">
+                    <input class="info-buttons" style="display:none;" id="cancel" type="button" @click="cancelInputs" value="Cancel">
+                    <input class="info-buttons" style="display:none;" id="save" type="button" @click="saveInputs" value="Save">
                 </div>
                 <br>
                                 
@@ -68,6 +82,10 @@
 </template>
 
 <script type="text/javascript">
+
+ import LanguageByteBarChart from './charts/LanguageByteBarChart'
+ import { mapState } from 'vuex'
+ import AugurStats from 'AugurStats'
   module.exports = {
     data() {
     
@@ -77,6 +95,9 @@
         loaded: false,
         newLanguageText: ''
       }
+    },
+    components: {
+        LanguageByteBarChart
     },
     methods: {
     
@@ -147,6 +168,33 @@
         repo () {
             return this.$store.state.baseRepo
         },
+        spec() {
+           // IF YOU WANT TO CALL YOUR ENDPOINT IN THE CHART FILE, THIS IS WHERE/HOW YOU SHOULD DO IT:
+         let repo = window.AugurAPI.Repo({ githubURL: this.repo })
+         repo.languageBytesUsed().then((data) => {
+
+           console.log("Language HERE", data)
+           this.bytes = data
+         })
+         //FINISH CALLING ENDPOINT
+
+         let config = {
+           "$schema": "https://vega.github.io/schema/vega-lite/v2.json",
+           "width": 950,
+           "height": 300,
+           "mark": "line",
+           "encoding": {
+             "x": {
+               "field": "date", "type": "temporal",
+             },
+             "y": {
+               "field": "value","type": "quantitative",
+             },
+           }
+         }
+         return config
+       }
+        
     },
     created(){
         let repo = window.AugurAPI.Repo({ githubURL: this.repo })

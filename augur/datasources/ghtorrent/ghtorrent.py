@@ -1082,6 +1082,23 @@ class GHTorrent(object):
         """)
         return pd.read_sql(projectInfoSQL, self.db, params={"repoid": str(repoid)})
     
+    @annotate(tag='language_bytes_used')
+    def language_bytes_used(self, owner, repo=None): 
+        """
+        Retrives languages that the selected project uses
+
+        :param owner: The name of the project owner or the id of the project in the projects table of the project in the projects table.
+        :param repo: The name of the repo. Unneeded if repository id was passed as owner.
+        :return: DataFrame with new watchers/week
+        """
+        repoid = self.repoid(owner, repo)
+        projectInfoSQL = s.sql.text("""
+            SELECT DISTINCT language, bytes
+            FROM project_languages
+            WHERE project_id = :repoid
+        """)
+        return pd.read_sql(projectInfoSQL, self.db, params={"repoid": str(repoid)})
+    
     @annotate(tag='edit_project_information')
     def edit_project_information(self, owner, new_name, new_description, new_url): 
         """

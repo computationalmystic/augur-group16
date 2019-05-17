@@ -828,6 +828,7 @@ def create_routes(server):
     
     server.addMetric(ghtorrent.project_information, 'project_information')
     server.addMetric(ghtorrent.get_languages, 'get_languages')
+    server.addTimeseries(ghtorrent.language_bytes_used, 'language_bytes_used')
     server.addMetric(ghtorrent.edit_project_information, 'edit_project_information')
 
     """

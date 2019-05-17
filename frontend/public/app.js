@@ -766,6 +766,7 @@ var AugurAPI = function () {
         Endpoint(repo, 'handleNewForm', 'handleNewForm');
         Endpoint(repo, 'projectInformation', 'project_information');
         Endpoint(repo, 'getLanguages', 'get_languages');
+        Timeseries(repo, 'languageBytesUsed', 'language_bytes_used');
       }
 
       if (repo.gitURL) {
@@ -2062,100 +2063,142 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
 ;(function(){
 'use strict';
 
+var _LanguageByteBarChart = require('./charts/LanguageByteBarChart');
+
+var _LanguageByteBarChart2 = _interopRequireDefault(_LanguageByteBarChart);
+
+var _vuex = require('vuex');
+
+var _AugurStats = require('AugurStats');
+
+var _AugurStats2 = _interopRequireDefault(_AugurStats);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 module.exports = {
-    data: function data() {
+  data: function data() {
 
-        return {
-            values: [],
-            languages: [],
-            loaded: false,
-            newLanguageText: ''
-        };
+    return {
+      values: [],
+      languages: [],
+      loaded: false,
+      newLanguageText: ''
+    };
+  },
+
+  components: {
+    LanguageByteBarChart: _LanguageByteBarChart2.default
+  },
+  methods: {
+    editMode: function editMode() {
+
+      document.getElementById('description').disabled = false;
+      document.getElementById('url').disabled = false;
+      document.getElementById('name').disabled = false;
+
+      var cancel = document.getElementById("cancel");
+      cancel.style.display = "block";
+      var save = document.getElementById("save");
+      save.style.display = "block";
+
+      var edit = document.getElementById("edit");
+      edit.style.display = "none";
+
+      var display = document.getElementById("displayDiv");
+      display.style.display = "none";
+
+      var editDiv = document.getElementById("editDiv");
+      editDiv.style.display = "block";
     },
+    cancelInputs: function cancelInputs() {
 
-    methods: {
-        editMode: function editMode() {
+      var cancel = document.getElementById("cancel");
+      cancel.style.display = "none";
 
-            document.getElementById('description').disabled = false;
-            document.getElementById('url').disabled = false;
-            document.getElementById('name').disabled = false;
+      var save = document.getElementById("save");
+      save.style.display = "none";
 
-            var cancel = document.getElementById("cancel");
-            cancel.style.display = "block";
-            var save = document.getElementById("save");
-            save.style.display = "block";
+      var edit = document.getElementById("edit");
+      edit.style.display = "block";
 
-            var edit = document.getElementById("edit");
-            edit.style.display = "none";
+      var editDiv = document.getElementById("editDiv");
+      editDiv.style.display = "none";
 
-            var display = document.getElementById("displayDiv");
-            display.style.display = "none";
-
-            var editDiv = document.getElementById("editDiv");
-            editDiv.style.display = "block";
-        },
-        cancelInputs: function cancelInputs() {
-
-            var cancel = document.getElementById("cancel");
-            cancel.style.display = "none";
-
-            var save = document.getElementById("save");
-            save.style.display = "none";
-
-            var edit = document.getElementById("edit");
-            edit.style.display = "block";
-
-            var editDiv = document.getElementById("editDiv");
-            editDiv.style.display = "none";
-
-            var display = document.getElementById("displayDiv");
-            display.style.display = "block";
-        },
-        saveInputs: function saveInputs() {
-
-            var project_name = document.getElementById("name").value;
-            var github_url = document.getElementById("url").value;
-            var project_description = document.getElementById("description").value;
-
-            console.log('Project name: ' + project_name + ' url: ' + github_url + ' description: ' + project_description);
-
-            var url = 'http://ec2-18-217-141-58.us-east-2.compute.amazonaws.com:5000/api/unstable/ghtorrent/edit_project_information?new_name=' + project_name + '&new_description=' + project_description + '&new_url=' + github_url;
-            console.log(url);
-            var method = {
-                method: "POST",
-                mode: 'no-cors'
-            };
-
-            fetch(url, method);
-        }
+      var display = document.getElementById("displayDiv");
+      display.style.display = "block";
     },
-    computed: {
-        repo: function repo() {
-            return this.$store.state.baseRepo;
-        }
-    },
-    created: function created() {
-        var _this = this;
+    saveInputs: function saveInputs() {
 
-        var repo = window.AugurAPI.Repo({ githubURL: this.repo });
-        repo.projectInformation().then(function (data) {
-            console.log("HERE", data);
-            _this.values = data;
-        });
+      var project_name = document.getElementById("name").value;
+      var github_url = document.getElementById("url").value;
+      var project_description = document.getElementById("description").value;
 
-        var language = window.AugurAPI.Repo({ githubURL: this.repo });
-        language.getLanguages().then(function (data) {
-            console.log("TWO", data);
-            _this.languages = data;
-        });
+      console.log('Project name: ' + project_name + ' url: ' + github_url + ' description: ' + project_description);
+
+      var url = 'http://ec2-18-217-141-58.us-east-2.compute.amazonaws.com:5000/api/unstable/ghtorrent/edit_project_information?new_name=' + project_name + '&new_description=' + project_description + '&new_url=' + github_url;
+      console.log(url);
+      var method = {
+        method: "POST",
+        mode: 'no-cors'
+      };
+
+      fetch(url, method);
     }
+  },
+  computed: {
+    repo: function repo() {
+      return this.$store.state.baseRepo;
+    },
+    spec: function spec() {
+      var _this = this;
+
+      var repo = window.AugurAPI.Repo({ githubURL: this.repo });
+      repo.languageBytesUsed().then(function (data) {
+
+        console.log("Language HERE", data);
+        _this.bytes = data;
+      });
+
+
+      var config = {
+        "$schema": "https://vega.github.io/schema/vega-lite/v2.json",
+        "width": 950,
+        "height": 300,
+        "mark": "line",
+        "encoding": {
+          "x": {
+            "field": "date", "type": "temporal"
+          },
+          "y": {
+            "field": "value", "type": "quantitative"
+          }
+        }
+      };
+      return config;
+    }
+  },
+  created: function created() {
+    var _this2 = this;
+
+    var repo = window.AugurAPI.Repo({ githubURL: this.repo });
+    repo.projectInformation().then(function (data) {
+      console.log("HERE", data);
+      _this2.values = data;
+    });
+
+    var language = window.AugurAPI.Repo({ githubURL: this.repo });
+    language.getLanguages().then(function (data) {
+      console.log("TWO", data);
+      _this2.languages = data;
+    });
+  }
 };
 })()
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('div',{attrs:{"id":"displayDiv"}},[_c('h1',{attrs:{"id":"proj-name"}},[_vm._v(_vm._s(_vm.values[0].name)+" ")]),_vm._v(" "),_c('div',[_vm._m(0),_vm._v(" "),_c('a',{attrs:{"href":_vm.values[0].url}},[_vm._v("GitHub")])]),_vm._v(" "),_c('div',[_vm._m(1),_vm._v(" "),_c('ul',{attrs:{"id":"example-1"}},_vm._l((_vm.languages),function(languages){return _c('li',[_vm._v("\n                    "+_vm._s(languages.language)+"\n                  ")])}))]),_vm._v(" "),_c('div',[_vm._m(2),_vm._v(" "),_c('p',[_vm._v(_vm._s(_vm.values[0].description))])]),_vm._v(" "),_c('input',{attrs:{"id":"edit","type":"button","value":"Edit"},on:{"click":_vm.editMode}})]),_vm._v(" "),_c('div',{staticStyle:{"display":"none"},attrs:{"id":"editDiv"}},[_c('form',{attrs:{"action":"","method":"post"}},[_c('div',[_vm._m(3),_vm._v(" "),_c('input',{attrs:{"disabled":"","type":"text","placeholder":_vm.values[0].name,"id":"name"}})]),_vm._v(" "),_c('div',[_vm._m(4),_vm._v(" "),_c('input',{attrs:{"disabled":"","id":"url","type":"text","placeholder":_vm.values[0].url}})]),_vm._v(" "),_vm._m(5),_vm._v(" "),_c('textarea',{attrs:{"disabled":"","id":"description","form":"projectForm","rows":"2","cols":"129"}},[_vm._v(_vm._s(_vm.values[0].description))]),_vm._v(" "),_c('br'),_vm._v(" "),_c('div',{attrs:{"id":"buttonDiv"},on:{"click":function($event){_vm.makeLanguageList()}}},[_c('button',{attrs:{"type":"submit"}},[_vm._v("Save Project Information")])]),_vm._v(" "),_c('div',{attrs:{"id":"buttonDiv"}},[_c('input',{staticStyle:{"display":"none"},attrs:{"id":"cancel","type":"button","value":"Cancel"},on:{"click":_vm.cancelInputs}}),_vm._v(" "),_c('input',{staticStyle:{"display":"none"},attrs:{"id":"save","type":"button","value":"Save"},on:{"click":_vm.saveInputs}})]),_vm._v(" "),_c('br')])])])}
-__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('span',[_vm._v("GitHub URL")])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('span',[_vm._v("Languages Used:")])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('span',[_vm._v("Project Description")])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('span',[_vm._v("Project Name")])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('span',[_vm._v("Project/ GitHub URL")])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('span',[_vm._v("Project Description:")])])}]
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('div',{attrs:{"id":"displayDiv"}},[_c('h1',{attrs:{"id":"proj-name"}},[_vm._v(_vm._s(_vm.values[0].name)+" ")]),_vm._v(" "),_c('div',{attrs:{"id":"github-div"}},[_vm._m(0),_vm._v(" "),_c('br'),_vm._v(" "),_c('a',{attrs:{"href":_vm.values[0].url}},[_vm._v(_vm._s(_vm.values[0].url))])]),_vm._v(" "),_c('div',{attrs:{"id":"description-div"}},[_vm._m(1),_vm._v(" "),_c('br'),_vm._v(" "),_c('p',[_vm._v(_vm._s(_vm.values[0].description))])]),_vm._v(" "),_c('div',[_vm._m(2),_vm._v(" "),_c('ul',{attrs:{"id":"example-1"}},_vm._l((_vm.languages),function(languages){return _c('li',[_vm._v("\n                    "+_vm._s(languages.language)+"\n                  ")])})),_vm._v(" "),_c('language-byte-bar-chart',{attrs:{"source":"languageBytesUsed","title":"Bytes Used per Language ","cite-url":"","cite-text":"Language Bytes"}}),_vm._v(" "),_c('div',{ref:"holder",staticStyle:{"position":"relative","z-index":"5"}},[_c('div',{staticClass:"chart"},[_c('h3',{staticStyle:{"text-align":"center"}},[_vm._v(_vm._s(_vm.title))]),_vm._v(" "),_c('vega-lite',{attrs:{"spec":_vm.spec,"data":_vm.values}}),_vm._v(" "),_c('p',[_vm._v(" "+_vm._s(_vm.chart)+" ")])],1)])],1),_vm._v(" "),_c('input',{staticClass:"info-buttons",attrs:{"id":"edit","type":"button","value":"Edit"},on:{"click":_vm.editMode}})]),_vm._v(" "),_c('div',{staticStyle:{"display":"none"},attrs:{"id":"editDiv"}},[_c('form',{attrs:{"action":"","method":"post"}},[_c('div',[_vm._m(3),_vm._v(" "),_c('input',{attrs:{"disabled":"","type":"text","placeholder":_vm.values[0].name,"id":"name"}})]),_vm._v(" "),_c('div',[_vm._m(4),_vm._v(" "),_c('input',{attrs:{"disabled":"","id":"url","type":"text","placeholder":_vm.values[0].url}})]),_vm._v(" "),_vm._m(5),_vm._v(" "),_c('textarea',{attrs:{"disabled":"","id":"description","form":"projectForm","rows":"2","cols":"129"}},[_vm._v(_vm._s(_vm.values[0].description))]),_vm._v(" "),_c('br'),_vm._v(" "),_c('div',{attrs:{"id":"buttonDiv"},on:{"click":function($event){_vm.makeLanguageList()}}}),_vm._v(" "),_c('div',{attrs:{"id":"buttonDiv"}},[_c('input',{staticClass:"info-buttons",staticStyle:{"display":"none"},attrs:{"id":"cancel","type":"button","value":"Cancel"},on:{"click":_vm.cancelInputs}}),_vm._v(" "),_c('input',{staticClass:"info-buttons",staticStyle:{"display":"none"},attrs:{"id":"save","type":"button","value":"Save"},on:{"click":_vm.saveInputs}})]),_vm._v(" "),_c('br')])])])}
+__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('h2',{staticClass:"info-headers"},[_vm._v("GitHub URL")])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('h2',{staticClass:"info-headers"},[_vm._v("Project Description")])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('h2',{staticClass:"info-headers"},[_vm._v("Languages Used:")])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('span',[_vm._v("Project Name")])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('span',[_vm._v("Project/ GitHub URL")])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('span',[_vm._v("Project Description:")])])}]
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
@@ -4889,6 +4932,89 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
     hotAPI.createRecord("data-v-8d346828", __vue__options__)
   } else {
     hotAPI.reload("data-v-8d346828", __vue__options__)
+  }
+})()}
+});
+
+;require.register("components/charts/LanguageByteBarChart.vue", function(exports, require, module) {
+;(function(){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _vuex = require('vuex');
+
+var _AugurStats = require('AugurStats');
+
+var _AugurStats2 = _interopRequireDefault(_AugurStats);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+  props: ['source', 'citeUrl', 'citeText', 'title', 'disableRollingAverage', 'alwaysByDate', 'data'],
+  data: function data() {
+    return {
+      values: []
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    var bytes = window.AugurAPI.Repo({ githubURL: this.repo });
+    bytes.languageBytesUsed().then(function (data) {
+      console.log("bytes", data);
+      _this.bytes = data;
+    });
+  },
+
+  computed: {
+    repo: function repo() {
+      return this.$store.state.baseRepo;
+    },
+    spec: function spec() {
+      var _this2 = this;
+
+      var repo = window.AugurAPI.Repo({ githubURL: this.repo });
+      repo.languageBytesUsed().then(function (data) {
+
+        console.log("New Language", data);
+        _this2.values = data;
+      });
+
+      var config = {
+        "$schema": "https://vega.github.io/schema/vega-lite/v3.json",
+        "data": {
+          "values": [{ "Language": "A", "Number of Bytes": 28 }, { "Language": "B", "Number of Bytes": 55 }, { "Language": "C", "Number of Bytes": 43 }, { "Language": "D", "Number of Bytes": 91 }, { "Language": "E", "Number of Bytes": 81 }, { "a": "F", "Number of Bytes": 53 }, { "Language": "G", "Number of Bytes": 19 }, { "Language": "H", "Number of Bytes": 87 }, { "Language": "I", "Number of Bytes": 52 }]
+        },
+        "mark": "bar",
+        "width": 950,
+        "height": 300,
+        "encoding": {
+          "x": { "field": "Language", "type": "nominal" },
+          "y": { "field": "Number of Bytes", "type": "quantitative" }
+        }
+      };
+      return config;
+    }
+  },
+  methods: {}
+};
+})()
+if (module.exports.__esModule) module.exports = module.exports.default
+var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
+if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{ref:"holder",staticStyle:{"position":"relative","z-index":"5"}},[_c('div',{staticClass:"chart"},[_c('h3',{staticStyle:{"text-align":"center"}},[_vm._v(_vm._s(_vm.title))]),_vm._v(" "),_c('vega-lite',{attrs:{"spec":_vm.spec,"data":_vm.values}}),_vm._v(" "),_c('p',[_vm._v(" "+_vm._s(_vm.chart)+" ")])],1)])}
+__vue__options__.staticRenderFns = []
+if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-fe4f35f0", __vue__options__)
+  } else {
+    hotAPI.reload("data-v-fe4f35f0", __vue__options__)
   }
 })()}
 });
