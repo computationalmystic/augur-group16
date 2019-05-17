@@ -16,7 +16,7 @@
     "Facade": {
         "host": "classes.augurlabs.io",
         "name": "git_minimal",
-        "pass": "password",
+        "pass": "INSERT PASSWORD",
         "port": "3306",
         "projects": ["Twitter"
         ],
@@ -25,12 +25,16 @@
     "GHTorrent": {
         "host": "classes.augurlabs.io",
         "name": "ghtorrent_minimal_16",
-        "pass": "texas2019",
+        "pass": "INSERT PASSWORD",
         "port": "3306",
         "user": "austin"
     },
     "GitHub": {
+<<<<<<< HEAD
         "apikey": "ea6529919191a643ef10e7ff2b2aea46d755cbe7"
+=======
+        "apikey": "INSERT GITHUB API KEY"
+>>>>>>> d956e8c0620afcb38fc7f9b163d3c9632b3f1048
     },
     "LibrariesIO": {
         "apikey": ""

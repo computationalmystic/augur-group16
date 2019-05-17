@@ -176,7 +176,7 @@
            console.log("Language HERE", data)
            this.bytes = data
          })
-         //FINISH CALLING ENDPOINT
+         //FINISH CALLING ENDPOINTS
 
          let config = {
            "$schema": "https://vega.github.io/schema/vega-lite/v2.json",
