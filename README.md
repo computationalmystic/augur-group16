@@ -101,6 +101,9 @@ To contribute to Augur, please check out our [development guide](http://augur.au
 ## Roadmap
 Our technical, outreach, and academic goals [roadmap](https://github.com/chaoss/augur/wiki/Release-Schedule).
 
+## Live System Address
+Here is our web-site on EC2: http://ec2-18-217-141-58.us-east-2.compute.amazonaws.com:5000/
+
 ## License and Copyright
 Copyright © 2018 University of Nebraska at Omaha, University of Missouri and CHAOSS Project at the Linux Foundation
 
